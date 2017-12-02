@@ -166,7 +166,7 @@ public class SearchActivity extends AbsRecyclerActivity {
     }
 
     @Override
-    protected void search(String query) {
+    protected void onSearch(String query) {
         if (TextUtils.isEmpty(query)) {
             Timber.d("Search is EMPTY");
             currentQuery = null;

@@ -14,15 +14,12 @@ import com.servpal.android.R;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import timber.log.Timber;
 
 public abstract class AbsRecyclerActivity extends AppCompatActivity {
 
     private LinearLayoutManager layoutManager;
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recycler;
-
-    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +54,14 @@ public abstract class AbsRecyclerActivity extends AppCompatActivity {
             }
         });
 
-        searchView = findViewById(R.id.search_view);
+        SearchView searchView = findViewById(R.id.search_view);
         RxSearchView.queryTextChanges(searchView)
                 .debounce(350, TimeUnit.MILLISECONDS)
                 .map(charSequence -> charSequence.toString().trim())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .skip(1)    // don't send a request for the initial emission on observe
-                .subscribe(this::search);
+                .subscribe(this::onSearch);
     }
 
     protected SwipeRefreshLayout getRefreshLayout() {
@@ -83,5 +80,5 @@ public abstract class AbsRecyclerActivity extends AppCompatActivity {
 
     protected abstract void onPagination();
 
-    protected abstract void search(String query);
+    protected abstract void onSearch(String query);
 }
