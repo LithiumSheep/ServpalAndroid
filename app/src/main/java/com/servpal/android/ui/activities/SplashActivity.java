@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 
+import com.servpal.android.CustomWebViewClient;
 import com.servpal.android.R;
 import com.servpal.android.api.ServpalHttpClient;
 
@@ -21,7 +22,18 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
-        // just open in a webview
+        // open in WebView that intercepts urls to itself
+        webView.setWebViewClient(new CustomWebViewClient());
         webView.loadUrl(ServpalHttpClient.baseUrl());
+        webView.getSettings().setJavaScriptEnabled(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
