@@ -122,12 +122,6 @@ public abstract class BasePagingAdapter<T> extends RecyclerView.Adapter implemen
         }
     }
 
-    public void addEmptyResult() {
-
-    }
-
-
-
     // another ItemVH class
 
     protected class LoadingVH extends RecyclerView.ViewHolder {
