@@ -5,7 +5,6 @@ import android.app.Application;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
 import com.jakewharton.threetenabp.AndroidThreeTen;
-import com.servpal.android.model.Session;
 import com.servpal.android.utils.ProductionTree;
 
 import io.fabric.sdk.android.Fabric;
@@ -30,6 +29,6 @@ public class ServpalApplication extends Application {
 
         AndroidThreeTen.init(this);
 
-        Session.initialize(this);
+        //Session.initialize(this);
     }
 }
